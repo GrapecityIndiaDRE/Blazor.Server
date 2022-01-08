@@ -1,0 +1,43 @@
+﻿@page "/"
+@inject IJSRuntime JS
+<h1>FlexGrid Unbound Mode</h1>
+
+@*
+<a href="/treeview">TreeView</a>*@
+
+<FlexGrid @ref="grid" AllowDragging="GridAllowDragging.Both" HeadersVisibility="GridHeadersVisibility.All" >
+    <FlexGridColumns>
+        @for (int i = 0; i < 5; i++)
+        {
+            <GridColumn Header="@string.Format("Column {0}",i+1)" ></GridColumn>
+        }
+    </FlexGridColumns>
+    <FlexGridRows>
+        @for (int i = 0; i < 5; i++)
+        {
+            <GridRow></GridRow>
+        }
+    </FlexGridRows>
+</FlexGrid>
+
+
+
+@code {
+
+    FlexGrid grid;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                for (int j = 0; j < grid.Columns.Count; j++)
+                {
+                    grid[i, j] = string.Format("Cell {0},{1}", i + 1, j + 1);
+                }
+            }
+
+        }
+    }
+}

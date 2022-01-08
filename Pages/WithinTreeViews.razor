@@ -1,0 +1,73 @@
+﻿@page "/withintrees"
+<h3>Between TreeViews</h3>
+
+<style>
+    .droppable{
+        border-color: green !important;
+        border-width: 3px !important;
+    }
+    .dragover{
+        /*background-color:darkblue !important;*/
+    }
+    .dragover.after{
+        border-style:none !important;
+        border-bottom-style: solid !important;
+    }
+    .dragover.before{
+        border-style:none !important;
+        border-top-style: solid !important;
+    }
+    
+</style>
+
+<div class="row">
+    <div class="col-sm-4"> 
+    <C1TreeView AllowDragDrop="true" ShowLines="true"  Style="@("width:100%;height:500px;")" OnDragOver="DragOverHandle" > 
+    <TreeViewItem Header="Devices">
+        <TreeViewItem Header="Mobiles">
+            <TreeViewItem Header="Apple" />
+            <TreeViewItem Header="Xiaomi" />
+            <TreeViewItem Header="Nokia" />
+        </TreeViewItem>
+        <TreeViewItem Header="Tablets" />
+        <TreeViewItem Header="Monitor" />
+    </TreeViewItem>
+    <TreeViewItem Header="Appliances">
+        <TreeViewItem Header="Television" />
+        <TreeViewItem Header="Washing Machine" />
+    </TreeViewItem>
+</C1TreeView>
+</div>
+
+<div class="col-sm-4" >
+    <C1TreeView AllowDragDrop="true" ShowLines="true"  Style="@("width:100%;height:500px;")" OnDragOver="DragOverHandle"> 
+    <TreeViewItem Header="Devices">
+        <TreeViewItem Header="Mobiles">
+            <TreeViewItem Header="Apple" />
+            <TreeViewItem Header="Xiaomi" />
+            <TreeViewItem Header="Nokia" />
+        </TreeViewItem>
+        <TreeViewItem Header="Tablets" />
+        <TreeViewItem Header="Monitor" />
+    </TreeViewItem>
+    <TreeViewItem Header="Appliances">
+        <TreeViewItem Header="Television" />
+        <TreeViewItem Header="Washing Machine" />
+    </TreeViewItem>
+</C1TreeView>
+</div>
+</div>
+
+@code {
+    protected void DragOverHandle(object sender,TreeViewDragDropEventArgs arg)
+    {
+        if (arg.TargetDropTree == arg.TargetDragTree)
+        {
+            arg.Cancel = true;
+        }
+        else
+        {
+            arg.Cancel = false;
+        }
+    }  
+}

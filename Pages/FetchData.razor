@@ -1,0 +1,24 @@
+﻿@page "/fetchdata"
+
+@using Drag_Drp.Data
+@inject WeatherForecastService ForecastService
+<h1>Weather forecast</h1>
+<p>This component demonstrates fetching data from a service.</p>
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+   <FlexGrid ItemsSource="@forecasts" AllowDragging="GridAllowDragging.Columns" HeadersVisibility="GridHeadersVisibility.All">
+   </FlexGrid>
+}
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

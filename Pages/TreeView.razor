@@ -1,0 +1,44 @@
+﻿@page "/treeview"
+<style>
+    .droppable{
+        border-color: green !important;
+        border-width: 3px !important;
+    }
+    .dragover{
+        /*background-color:darkblue !important;*/
+    }
+    .dragover.after{
+        border-style:none !important;
+        border-bottom-style: solid !important;
+    }
+    .dragover.before{
+        border-style:none !important;
+        border-top-style: solid !important;
+    }
+    
+</style>
+<h3>TreeView</h3>
+<C1TreeView AllowDragDrop="true" ShowLines="true" OnDragOver="DragOver"  Style="@("width:500px;height:500px;")" > 
+    <TreeViewItem Header="Devices">
+        <TreeViewItem Header="Mobiles">
+            <TreeViewItem Header="Apple" />
+            <TreeViewItem Header="Xiaomi" />
+            <TreeViewItem Header="Nokia" />
+        </TreeViewItem>
+        <TreeViewItem Header="Tablets" />
+        <TreeViewItem Header="Monitor" />
+    </TreeViewItem>
+    <TreeViewItem Header="Appliances">
+        <TreeViewItem Header="Television" />
+        <TreeViewItem Header="Washing Machine" />
+    </TreeViewItem>
+</C1TreeView>
+@code {
+    protected void DragOver(object sender, TreeViewDragDropEventArgs arg)
+    {
+        if(arg.TargetDropItem.Header == "Nokia")
+        {
+            arg.Cancel = true;
+        }
+    }
+}
